@@ -3,8 +3,8 @@ body {
     color: #D4D4D4;
     font-family: Arial, sans-serif;
     padding: 10%;
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center;
+    align-items: center;
 }
 
 form {
@@ -19,10 +19,6 @@ input[type="text"] {
     background-color: #555B66;
     color: #D4D4D4;
     border-radius: 15px;
-}
-
-input[type="radio"] {
-    width: auto;
 }
 
 input[type="submit"] {

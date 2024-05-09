@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анкета</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<bodys>
     <form>
-        <label for="firstName">Имя:</label><br><br>
-        <input type="text" id="firstName" name="firstName" required title="Пожалуйста, введите ваше имя"><br><br>
+        <label for="firstName">Имя</label><br>
+        <input type="text" id="firstName" name="firstName" required><br><br>
         
-        <label for="lastName">Фамилия:</label><br><br>
-        <input type="text" id="lastName" name="lastName" required title="Пожалуйста, введите ваше имя"><br><br>
+        <label for="lastName">Фамилия</label><br>
+        <input type="text" id="lastName" name="lastName" required><br><br>
         
-        <label for="nickname">Никнейм:</label><br><br>
-        <input type="text" id="nickname" name="nickname" required title="Пожалуйста, введите ваше имя"><br><br>
+        <label for="nickname">Никнейм</label><br>
+        <input type="text" id="nickname" name="nickname" required><br><br>
         
         <label>Что вы больше любите?</label><br>
-        <input type="radio" id="tea" name="drink" value="tea">
+        <input class="form-check-input" type="radio" id="tea" name="drink" value="tea" required>
         <label for="tea">Чай</label><br>
-        <input type="radio" id="coffee" name="drink" value="coffee">
+        <input class="form-check-input" type="radio" id="coffee" name="drink" value="coffee">
         <label for="coffee">Кофе</label><br>
-        <input type="radio" id="milk" name="drink" value="milk">
+        <input class="form-check-input" type="radio" id="milk" name="drink" value="milk">
         <label for="milk">Молоко</label><br><br>
         
         <br>
-        <input type="submit" value="Отправить">
+        <center>
+            <input type="submit" value="Отправить">
+        </center>
     </form>
 </body>
 </html>
