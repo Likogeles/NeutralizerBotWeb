@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анкета</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-
-<h1>My Second Heading</h1>
-
-<p>My second paragraph.</p>
-
+    <form>
+        <label for="firstName">Имя:</label><br><br>
+        <input type="text" id="firstName" name="firstName" required title="Пожалуйста, введите ваше имя"><br><br>
+        
+        <label for="lastName">Фамилия:</label><br><br>
+        <input type="text" id="lastName" name="lastName" required title="Пожалуйста, введите ваше имя"><br><br>
+        
+        <label for="nickname">Никнейм:</label><br><br>
+        <input type="text" id="nickname" name="nickname" required title="Пожалуйста, введите ваше имя"><br><br>
+        
+        <label>Что вы больше любите?</label><br>
+        <input type="radio" id="tea" name="drink" value="tea">
+        <label for="tea">Чай</label><br>
+        <input type="radio" id="coffee" name="drink" value="coffee">
+        <label for="coffee">Кофе</label><br>
+        <input type="radio" id="milk" name="drink" value="milk">
+        <label for="milk">Молоко</label><br><br>
+        
+        <br>
+        <input type="submit" value="Отправить">
+    </form>
 </body>
 </html>

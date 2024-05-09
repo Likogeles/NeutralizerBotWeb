@@ -1,0 +1,40 @@
+body {
+    background-color: #39404D;
+    color: #D4D4D4;
+    font-family: Arial, sans-serif;
+    padding: 10%;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+}
+
+form {
+    max-width: 400px;
+}
+
+input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #555B66;
+    background-color: #555B66;
+    color: #D4D4D4;
+    border-radius: 15px;
+}
+
+input[type="radio"] {
+    width: auto;
+}
+
+input[type="submit"] {
+    background-color: #963165;
+    color: #D4D4D4;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+input[type="submit"]:hover {
+    background-color: #963165;
+    opacity: 0.8;
+}
