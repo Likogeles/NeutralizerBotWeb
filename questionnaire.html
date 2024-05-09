@@ -9,15 +9,15 @@
 </head>
 <bodys>
     <form>
-        <label for="name">Имя</label><br>
+        <label for="name">Имя (больше 5 символов)</label><br>
         <input type="text" id="name" name="name" required><br>
         <small id="nameHelp">По нему вас узнают другие игроки.</small><br><br>
         
-        <label for="surname">Фамилия</label><br>
+        <label for="surname">Фамилия (больше 5 символов)</label><br>
         <input type="text" id="surname" name="surname" required><br>
         <small id="surnameHelp">По ней вас узнают другие игроки.</small><br><br>
         
-        <label for="nickname">Никнейм</label><br>
+        <label for="nickname">Никнейм (больше 5 символов)</label><br>
         <input type="text" id="nickname" name="nickname" required><br>
         <small id="nicknameHelp">Анонимный никнейм, для отображения в таблице лидеров.</small><br>
         <br>
@@ -29,11 +29,39 @@
         <label for="coffee">Кофе</label><br>
         <input class="form-check-input" type="radio" id="milk" name="drink" value="milk">
         <label for="milk">Молоко</label><br><br>
-        
+        <div id="error"></div>
         <br>
         <center>
-            <input type="submit" value="Отправить">
+            <input id="submitBtn" type="submit" value="Отправить">
         </center>
     </form>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let submitBtn = document.getElementById("submitBtn");
+        tg.expand();
+
+        submitBtn.addEventListener("click", () =>{
+            let name = document.getElementById("name");
+            let surname = document.getElementById("surname");
+            let nickname = document.getElementById("nickname");
+
+            if (name.lenght < 5){
+                document.getElementById("error").innerText = "Имя слишком короткое.";
+                return;
+            }
+            if (surname.lenght < 5){
+                document.getElementById("error").innerText = "Фамилия слишком короткая.";
+                return;
+            }
+            if (nickname.lenght < 5){
+                document.getElementById("error").innerText = "Никнейм слишком короткий.";
+                return;
+            }
+
+            tg.close()
+        });
+
+    </script>
 </body>
 </html>
