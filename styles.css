@@ -11,10 +11,16 @@ form {
     max-width: 400px;
 }
 
+
+small {
+    font-size:0.8em;
+    color: #989898;
+    line-height: 0.1;
+}
+
 input[type="text"] {
     width: 90%;
     padding: 8px;
-    margin-bottom: 10px;
     border: 1px solid #555B66;
     background-color: #555B66;
     color: #D4D4D4;
