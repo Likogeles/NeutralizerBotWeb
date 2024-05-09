@@ -9,16 +9,16 @@
 </head>
 <bodys>
     <form>
-        <label for="name">Имя (больше 5 символов)</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <small id="nameHelp">По нему вас узнают другие игроки.</small><br><br>
+        <label for="first_name">Имя (больше 5 символов)</label><br>
+        <input type="text" id="first_name_id" name="first_name" required><br>
+        <small id="first_nameHelp">По нему вас узнают другие игроки.</small><br><br>
         
         <label for="surname">Фамилия (больше 5 символов)</label><br>
-        <input type="text" id="surname" name="surname" required><br>
+        <input type="text" id="surname_id" name="surname" required><br>
         <small id="surnameHelp">По ней вас узнают другие игроки.</small><br><br>
         
         <label for="nickname">Никнейм (больше 5 символов)</label><br>
-        <input type="text" id="nickname" name="nickname" required><br>
+        <input type="text" id="nickname_id" name="nickname" required><br>
         <small id="nicknameHelp">Анонимный никнейм, для отображения в таблице лидеров.</small><br>
         <br>
 
@@ -43,31 +43,34 @@
 
         submitBtn.addEventListener("click", () =>{
             document.getElementById("error").innerText = "";
-            let name = document.getElementById("name");
-            let surname = document.getElementById("surname");
-            let nickname = document.getElementById("nickname");
+            let _name = document.getElementById("first_name_id").value;
+            let _surname = document.getElementById("surname_id").value;
+            let _nickname = document.getElementById("nickname_id").value;
 
-            if (name.lenght < 5){
+            if (_name.length < 5){
                 document.getElementById("error").innerText = "Имя слишком короткое.";
                 return;
             }
-            if (surname.lenght < 5){
+            if (_surname.length < 5){
                 document.getElementById("error").innerText = "Фамилия слишком короткая.";
                 return;
             }
-            if (nickname.lenght < 5){
+            if (_nickname.length < 5){
                 document.getElementById("error").innerText = "Никнейм слишком короткий.";
                 return;
             }
             
             let data = {
-                name: name,
-                surname: surname,
-                nickname: nickname
+                type: "questionnaire",
+                name: _name,
+                surname: _surname,
+                nickname: _nickname
             }
             tg.sendData(JSON.stringify(data));
 
             tg.close()
+
+            return;
         });
 
     </script>
