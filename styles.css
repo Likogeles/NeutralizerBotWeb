@@ -36,6 +36,19 @@ input[type="submit"] {
     border-radius: 15px;
 }
 
+select[class="form-select"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #555B66;
+    background-color: #555B66;
+    color: #D4D4D4;
+    border-radius: 15px;
+}
+
+div[class="alert alert-danger"] {
+    visibility: hidden;
+}
+
 input[type="submit"]:hover {
     background-color: #963165;
     opacity: 0.8;
