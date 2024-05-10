@@ -2,13 +2,11 @@ body {
     background-color: #39404D;
     color: #D4D4D4;
     font-family: Arial, sans-serif;
-    padding: 10%;
+    padding-top: 50px;
+    padding-left: 10%;
+    padding-right: 10%;
     justify-content: center;
     align-items: center;
-}
-
-form {
-    max-width: 400px;
 }
 
 
@@ -18,8 +16,26 @@ small {
     line-height: 0.1;
 }
 
-input[type="text"] {
-    width: 90%;
+input[type="text"]{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #555B66;
+    background-color: #555B66;
+    color: #D4D4D4;
+    border-radius: 15px;
+}
+
+input[type="number"]{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #555B66;
+    background-color: #555B66;
+    color: #D4D4D4;
+    border-radius: 15px;
+}
+
+textarea {
+    width: 100%;
     padding: 8px;
     border: 1px solid #555B66;
     background-color: #555B66;
@@ -37,7 +53,7 @@ input[type="submit"] {
 }
 
 select[class="form-select"] {
-    width: 90%;
+    width: 100%;
     padding: 8px;
     border: 1px solid #555B66;
     background-color: #555B66;
