@@ -90,6 +90,16 @@
             let _surname = document.getElementById("surname_id").value;
             let _nickname = document.getElementById("nickname_id").value;
 
+            if (_name.length == 0){
+                document.getElementById("error").innerText = "Имя слишком короткое.";
+                document.getElementById("error").style.visibility = "visible";
+                return;
+            }
+            if (_surname.length == 0){
+                document.getElementById("error").innerText = "Фамилия слишком короткая.";
+                document.getElementById("error").style.visibility = "visible";
+                return;
+            }
             if (_nickname.length == 0){
                 document.getElementById("error").innerText = "Никнейм слишком короткий.";
                 document.getElementById("error").style.visibility = "visible";
