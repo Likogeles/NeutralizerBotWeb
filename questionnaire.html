@@ -9,15 +9,15 @@
 </head>
 <bodys>
     <form>
-        <label for="first_name">Имя (больше 5 символов)</label><br>
+        <label for="first_name">Имя</label><br>
         <input type="text" id="first_name_id" name="first_name" required><br>
         <small id="first_nameHelp">Так Ваши друзья Вас узнают.</small><br><br>
         
-        <label for="surname">Фамилия (больше 5 символов)</label><br>
+        <label for="surname">Фамилия</label><br>
         <input type="text" id="surname_id" name="surname" required><br>
         <small id="surnameHelp">Так Ваши друзья Вас точно узнают.</small><br><br>
         
-        <label for="nickname">Никнейм (больше 5 символов)</label><br>
+        <label for="nickname">Уникальный никнейм</label><br>
         <input type="text" id="nickname_id" name="nickname" required><br>
         <small id="nicknameHelp">Анонимный никнейм, для отображения в таблице лидеров.</small><br>
         <br>
@@ -46,7 +46,7 @@
             <option value="airplain">Самолёт</option>
         </select><br>
 
-        <label>Какой запах Вам наиболее приятен?</label><br>
+        <label>Какой запах Вам наиболее неприятен?</label><br>
         <select id="smell_id" class="form-select">
             <option value="garlic">Чеснок</option>
             <option value="cabbage">Капуста</option>
@@ -90,17 +90,7 @@
             let _surname = document.getElementById("surname_id").value;
             let _nickname = document.getElementById("nickname_id").value;
 
-            if (_name.length < 5){
-                document.getElementById("error").innerText = "Имя слишком короткое.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
-            }
-            if (_surname.length < 5){
-                document.getElementById("error").innerText = "Фамилия слишком короткая.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
-            }
-            if (_nickname.length < 5){
+            if (_nickname.length == 0){
                 document.getElementById("error").innerText = "Никнейм слишком короткий.";
                 document.getElementById("error").style.visibility = "visible";
                 return;
