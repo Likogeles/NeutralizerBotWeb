@@ -11,22 +11,64 @@
     <form>
         <label for="first_name">Имя (больше 5 символов)</label><br>
         <input type="text" id="first_name_id" name="first_name" required><br>
-        <small id="first_nameHelp">По нему вас узнают другие игроки.</small><br><br>
+        <small id="first_nameHelp">Так Ваши друзья Вас узнают.</small><br><br>
         
         <label for="surname">Фамилия (больше 5 символов)</label><br>
         <input type="text" id="surname_id" name="surname" required><br>
-        <small id="surnameHelp">По ней вас узнают другие игроки.</small><br><br>
+        <small id="surnameHelp">Так Ваши друзья Вас точно узнают.</small><br><br>
         
         <label for="nickname">Никнейм (больше 5 символов)</label><br>
         <input type="text" id="nickname_id" name="nickname" required><br>
         <small id="nicknameHelp">Анонимный никнейм, для отображения в таблице лидеров.</small><br>
         <br>
 
-        <label>Что вы больше любите?</label><br>
+        <label>Куда бы Вы отправились в путешествие?</label><br>
+        <select id="continent_id" class="form-select">=
+            <option value="australia">Австралия</option>
+            <option value="asia">Азия</option>
+            <option value="africa">Африка</option>
+            <option value="europe">Европа</option>
+            <option value="north_america">Северная Америка</option>
+            <option value="south_america">Южная Америка</option>
+        </select><br>
+
+        <label>Что Вы больше любите?</label><br>
         <select id="drink_id" class="form-select">
             <option value="tea">Чай</option>
             <option value="coffee">Кофе</option>
             <option value="milk">Молоко</option>
+        </select><br>
+
+        <label>Какой Ваш любимый способ передвижения?</label><br>
+        <select id="transport_id" class="form-select">
+            <option value="car">Автомобиль</option>
+            <option value="train">Поезд</option>
+            <option value="airplain">Самолёт</option>
+        </select><br>
+
+        <label>Какой запах Вам наиболее приятен?</label><br>
+        <select id="smell_id" class="form-select">
+            <option value="garlic">Чеснок</option>
+            <option value="cabbage">Капуста</option>
+            <option value="fish">Рыба</option>
+        </select><br>
+
+        <label>Выберете домашнее животное</label><br>
+        <select id="pet_id" class="form-select">
+            Кошка, Собака, Попугай, Грызун, Рептилия
+            Cat, Dog, Parrot, Rodent, Reptile
+            <option value="cat">Кошка</option>
+            <option value="dog">Собака</option>
+            <option value="bird">Птица</option>
+            <option value="rodent">Грызун</option>
+            <option value="reptile">Рептилия</option>
+        </select><br>
+
+        <label>Ваше любимое занятие из предложенных?</label><br>
+        <select id="employment_id" class="form-select">
+            <option value="restaurant">Ходить в ресторан</option>
+            <option value="duck">Коллекционировать резиновых уточек</option>
+            <option value="jam">Делать варенье</option>
         </select><br>
 
         <div id="error" class="alert alert-danger" role="alert" visibility="hidden"></div>
@@ -69,7 +111,12 @@
                 name: _name,
                 surname: _surname,
                 nickname: _nickname,
-                drink: document.getElementById("drink_id").value
+                continent: document.getElementById("continent_id").value,
+                drink: document.getElementById("drink_id").value,
+                transport: document.getElementById("transport_id").value,
+                smell: document.getElementById("smell_id").value,
+                pet: document.getElementById("pet_id").value,
+                employment: document.getElementById("employment_id").value
             }
             tg.sendData(JSON.stringify(data));
 
