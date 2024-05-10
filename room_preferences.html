@@ -19,11 +19,12 @@
         
         <br>
         <label>Свидетели:</label><br>
+        <small>Укажите, кто может стать свидетелем нейтрализации.</small>
         <select id="witness_id" class="form-select">
             <option value="all">Все окружающие</option>
             <option value="gamers">Только игроки</option>
         </select>
-        <small>Укажите, кто может стать свидетелем нейтрализации.</small><br>
+        <br>
         
         <br>
         <div class="form-check form-switch">
@@ -40,9 +41,10 @@
         <small id="spy_confirmHelp">Подтверждать нейтрализацию будет шпион.</small><br>
 
         <br>
-        <label>Опциональные правила</label>
+        <label>Дополнительные правила</label><br>
+        <small>Укажите здесь правила, которые мы не предусмотрели.</small>
         <textarea id="extra_preferences_id" rows="3"></textarea>
-        <small>Укажите здесь правила, которые мы не предусмотрели.</small><br>
+        <br>
         
         <br>
         <center>
@@ -91,39 +93,13 @@
         });
 
         submitBtn.addEventListener("click", () =>{
-            document.getElementById("error").innerText = "";
-            document.getElementById("error").style.visibility = "hidden";
-            let _name = document.getElementById("first_name_id").value;
-            let _surname = document.getElementById("surname_id").value;
-            let _nickname = document.getElementById("nickname_id").value;
-
-            if (_name.length == 0){
-                document.getElementById("error").innerText = "Имя слишком короткое.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
-            }
-            if (_surname.length == 0){
-                document.getElementById("error").innerText = "Фамилия слишком короткая.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
-            }
-            if (_nickname.length == 0){
-                document.getElementById("error").innerText = "Никнейм слишком короткий.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
-            }
-            
             let data = {
-                type: "questionnaire",
-                name: _name,
-                surname: _surname,
-                nickname: _nickname,
-                continent: document.getElementById("continent_id").value,
-                drink: document.getElementById("drink_id").value,
-                transport: document.getElementById("transport_id").value,
-                smell: document.getElementById("smell_id").value,
-                pet: document.getElementById("pet_id").value,
-                employment: document.getElementById("employment_id").value
+                type: "room_preferences",
+                neutralization_message: document.getElementById("neutralization_message_id").value,
+                witness: document.getElementById("witness_id").value,
+                gamers_list: document.getElementById("gamers_list_id").checked,
+                spy_confirm: document.getElementById("spy_confirm_id").checked,
+                extra_preferences: document.getElementById("extra_preferences_id").value
             }
             tg.sendData(JSON.stringify(data));
 
