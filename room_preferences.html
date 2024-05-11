@@ -24,14 +24,13 @@
             <option value="all">Все окружающие</option>
             <option value="gamers">Только игроки</option>
         </select>
-        <br>
         
-        <br>
+        <!-- <br>
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="gamers_list_id" checked>
             <label>Список игроков на старте.</label>
         </div>
-        <small id="gamers_listHelp">В начале игры появится список всех участников.</small><br>
+        <small id="gamers_listHelp">В начале игры появится список всех участников.</small><br> -->
         
         <br>
         <div class="form-check form-switch">
@@ -83,21 +82,21 @@
             
         });
 
-        let gamers_list_field = document.getElementById("gamers_list_id");
-        gamers_list_field.addEventListener("change",()=>{
-            if (gamers_list_field.checked){
-                document.getElementById("gamers_listHelp").textContent = "В начале игры появится список всех участников.";
-            }else{
-                document.getElementById("gamers_listHelp").textContent = "Игроки не получат точный список участников.";
-            }
-        });
+        // let gamers_list_field = document.getElementById("gamers_list_id");
+        // gamers_list_field.addEventListener("change",()=>{
+        //     if (gamers_list_field.checked){
+        //         document.getElementById("gamers_listHelp").textContent = "В начале игры появится список всех участников.";
+        //     }else{
+        //         document.getElementById("gamers_listHelp").textContent = "Игроки не получат точный список участников.";
+        //     }
+        // });
 
         submitBtn.addEventListener("click", () =>{
             let data = {
                 type: "room_preferences",
                 neutralization_message: document.getElementById("neutralization_message_id").value,
                 witness: document.getElementById("witness_id").value,
-                gamers_list: document.getElementById("gamers_list_id").checked,
+                // gamers_list: document.getElementById("gamers_list_id").checked,
                 spy_confirm: document.getElementById("spy_confirm_id").checked,
                 extra_preferences: document.getElementById("extra_preferences_id").value
             }
