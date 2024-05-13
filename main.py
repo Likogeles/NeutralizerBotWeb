@@ -1,16 +1,21 @@
-from flask import Flask
+from flask import Flask, render_template
 
+app = Flask(__name__, template_folder="templates")
 
-app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return 'NeutralizerBotWeb'
 
 
-@app.route('/reports/<path:path>')
-def send_report(path):
-    return send_from_directory('reports', path)
+@app.route('/questionnaire')
+def questionnaire():
+    return render_template('questionnaire.html')
+
+
+@app.route('/room_preferences')
+def room_preferences():
+    return render_template('room_preferences.html')
 
 
 if __name__ == '__main__':
