@@ -92,6 +92,7 @@
             if (user_id){
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "GET", "http://127.0.0.1:4040/api/get_user_by_id?user_id="+user_id, false );
+                xmlHttp.open( "GET", "http://91.222.239.246:4040/api/get_user_by_id?user_id="+user_id, false );
                 xmlHttp.send( null );
                 if (xmlHttp.responseText != "False"){
                     main_user_id = user_id;
