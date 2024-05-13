@@ -141,8 +141,13 @@
                 return;
             }
             
+            let type_message = "questionnaire"
+            if (user_id){
+                type_message = "questionnaire_user_update"
+            }
+
             let data = {
-                type: "questionnaire",
+                type: type_message,
                 name: _name,
                 surname: _surname,
                 nickname: _nickname,
