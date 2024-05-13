@@ -82,6 +82,38 @@
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        window.onload = function() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const user_id = urlParams.get('user_id')
+
+            if (user_id){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", "http://127.0.0.1:4040/api/get_user_by_id?user_id="+user_id, false );
+                xmlHttp.send( null );
+                if (xmlHttp.responseText != "False"){
+                    res = JSON.parse(xmlHttp.responseText)["user"]
+
+                    document.getElementById("first_name_id").value = res["name"]
+                    document.getElementById("surname_id").value = res["surname"]
+                    document.getElementById("nickname_id").value = res["nickname"]
+                    
+                    changeSelected = (select_id, option_text) => {
+                        let select = document.querySelector(select_id);
+                        let option = select.querySelector(option_text);
+                        select.value = option.value;
+                    };
+
+                    changeSelected("continent_id", res["form"]["continent"])
+                    changeSelected("drink_id", res["form"]["drink"])
+                    changeSelected("transport_id", res["form"]["transport"])
+                    changeSelected("smell_id", res["form"]["smell"])
+                    changeSelected("pet_id", res["form"]["pet"])
+                    changeSelected("employment_id", res["form"]["employment"])
+                }
+            }
+        }
+
         let tg = window.Telegram.WebApp;
         let submitBtn = document.getElementById("submitBtn");
         tg.expand();
