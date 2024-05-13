@@ -144,13 +144,8 @@
                 return;
             }
             
-            let type_message = "questionnaire";
-            if (user_id){
-                type_message = "questionnaire_user_update";
-            }
-
             let data = {
-                type: type_message,
+                type: "questionnaire",
                 name: _name,
                 surname: _surname,
                 nickname: _nickname,
@@ -161,6 +156,10 @@
                 pet: document.getElementById("pet_id").value,
                 employment: document.getElementById("employment_id").value
             }
+            if (main_user_id){
+                data["type"] = "questionnaire_user_update";
+            }
+
             tg.sendData(JSON.stringify(data));
 
             tg.close();
