@@ -82,6 +82,8 @@
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+
+        let main_user_id = null;
         window.onload = function() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
@@ -92,6 +94,7 @@
                 xmlHttp.open( "GET", "http://127.0.0.1:4040/api/get_user_by_id?user_id="+user_id, false );
                 xmlHttp.send( null );
                 if (xmlHttp.responseText != "False"){
+                    main_user_id = user_id;
                     res = JSON.parse(xmlHttp.responseText)["user"]
 
                     document.getElementById("first_name_id").value = res["name"]
@@ -141,9 +144,9 @@
                 return;
             }
             
-            let type_message = "questionnaire"
+            let type_message = "questionnaire";
             if (user_id){
-                type_message = "questionnaire_user_update"
+                type_message = "questionnaire_user_update";
             }
 
             let data = {
