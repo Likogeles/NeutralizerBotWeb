@@ -87,33 +87,33 @@
         window.onload = function() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            const user_id = urlParams.get('user_id')
+            const user_id = urlParams.get('user_id');
 
             if (user_id){
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open( "GET", "http://127.0.0.1:4040/api/get_user_by_id?user_id="+user_id, false );
-                xmlHttp.open( "GET", "http://91.222.239.246:4040/api/get_user_by_id?user_id="+user_id, false );
+                // xmlHttp.open( "GET", "http://127.0.0.1:4040/api/get_user_by_id?user_id="+user_id, false );
+                xmlHttp.open( "GET", "https://neutralizerbot.ru/database/api/get_user_by_id?user_id="+user_id, false );
                 xmlHttp.send( null );
                 if (xmlHttp.responseText != "False"){
                     main_user_id = user_id;
-                    res = JSON.parse(xmlHttp.responseText)["user"]
-
-                    document.getElementById("first_name_id").value = res["name"]
-                    document.getElementById("surname_id").value = res["surname"]
-                    document.getElementById("nickname_id").value = res["nickname"]
+                    res = JSON.parse(xmlHttp.responseText)["user"];
                     
+                    document.getElementById("first_name_id").value = res["name"];
+                    document.getElementById("surname_id").value = res["surname"];
+                    document.getElementById("nickname_id").value = res["nickname"];
+                    
+
                     changeSelected = (select_id, option_text) => {
-                        let select = document.querySelector(select_id);
-                        let option = select.querySelector(option_text);
-                        select.value = option.value;
+                        const $select = document.querySelector("#"+select_id);
+                        $select.value = option_text;
                     };
 
-                    changeSelected("continent_id", res["form"]["continent"])
-                    changeSelected("drink_id", res["form"]["drink"])
-                    changeSelected("transport_id", res["form"]["transport"])
-                    changeSelected("smell_id", res["form"]["smell"])
-                    changeSelected("pet_id", res["form"]["pet"])
-                    changeSelected("employment_id", res["form"]["employment"])
+                    changeSelected("continent_id", res["form"]["continent"]);
+                    changeSelected("drink_id", res["form"]["drink"]);
+                    changeSelected("transport_id", res["form"]["transport"]);
+                    changeSelected("smell_id", res["form"]["smell"]);
+                    changeSelected("pet_id", res["form"]["pet"]);
+                    changeSelected("employment_id", res["form"]["employment"]);
                 }
             }
         }
