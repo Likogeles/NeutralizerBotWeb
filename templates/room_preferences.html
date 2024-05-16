@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки игры</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico"> -->
+</head>
+<body>
+    <form>
+        <label for="nickname">Отключать уведомления, когда шпионов:</label>
+        <input min="0" max="20" type="number" id="neutralization_message_id" value="5"/>
+        <small id="neutralization_messageHelp">Уведомления о нейтрализации будут отключены, когда останется 5 шпионов.</small><br>
+        
+        <br>
+        <label>Свидетели:</label><br>
+        <small>Укажите, кто может стать свидетелем нейтрализации.</small>
+        <select id="witness_id" class="form-select">
+            <option value="all">Все окружающие</option>
+            <option value="gamers">Только игроки</option>
+        </select>
+        
+        <!-- <br>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="gamers_list_id" checked>
+            <label>Список игроков на старте.</label>
+        </div>
+        <small id="gamers_listHelp">В начале игры появится список всех участников.</small><br> -->
+        
+        <br>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="spy_confirm_id" checked>
+            <label>Шпион сам проверяет выполнение правил.</label>
+        </div>
+        <small id="spy_confirmHelp">Подтверждать нейтрализацию будет шпион.</small><br>
+
+        <br>
+        <label>Дополнительные правила</label><br>
+        <small>Укажите здесь правила, которые мы не предусмотрели.</small>
+        <textarea id="extra_preferences_id" rows="3"></textarea>
+        <br>
+        
+        <br>
+        <center>
+            <input id="submitBtn" type="submit" value="Сохранить">
+        </center>
+    </form>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+    </script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let submitBtn = document.getElementById("submitBtn");
+        tg.expand();
+        
+        let neutralization_message_field = document.getElementById("neutralization_message_id");
+        neutralization_message_field.addEventListener("change",()=>{
+            if (neutralization_message_field.value == 0){
+                document.getElementById("neutralization_messageHelp").textContent = "Уведомления о нейтрализации будут приходить всегда.";
+            }else{
+                let spies_text = " шпионов."
+                if (neutralization_message_field.value == 1) {
+                    spies_text = " шпион."
+                } else if (neutralization_message_field.value == 2 || neutralization_message_field.value == 3 || neutralization_message_field.value == 4){
+                    spies_text = " шпиона."
+                }
+                document.getElementById("neutralization_messageHelp").textContent = "Уведомления о нейтрализации будут отключены, когда останется " + neutralization_message_field.value + spies_text;
+            }
+        });
+
+        let spy_confirm_field = document.getElementById("spy_confirm_id");
+        spy_confirm_field.addEventListener("change",()=>{
+            let spy_confirm_text = "агент."
+            if (spy_confirm_field.checked){
+                spy_confirm_text = "шпион."
+            }
+            document.getElementById("spy_confirmHelp").textContent = "Подтверждать нейтрализацию будет " + spy_confirm_text;
+            
+        });
+
+        // let gamers_list_field = document.getElementById("gamers_list_id");
+        // gamers_list_field.addEventListener("change",()=>{
+        //     if (gamers_list_field.checked){
+        //         document.getElementById("gamers_listHelp").textContent = "В начале игры появится список всех участников.";
+        //     }else{
+        //         document.getElementById("gamers_listHelp").textContent = "Игроки не получат точный список участников.";
+        //     }
+        // });
+
+        submitBtn.addEventListener("click", () =>{
+            let data = {
+                type: "room_preferences",
+                neutralization_message: document.getElementById("neutralization_message_id").value,
+                witness: document.getElementById("witness_id").value,
+                // gamers_list: document.getElementById("gamers_list_id").checked,
+                spy_confirm: document.getElementById("spy_confirm_id").checked,
+                extra_preferences: document.getElementById("extra_preferences_id").value
+            }
+            tg.sendData(JSON.stringify(data));
+
+            tg.close()
+
+            return;
+        });
+
+    </script>
+</body>
+</html>
