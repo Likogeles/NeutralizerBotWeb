@@ -12,7 +12,7 @@
 </head>
 <body>
     <form>
-        <label for="nickname">Отключать уведомления, когда шпионов:</label>
+        <label>Отключать уведомления, когда шпионов:</label>
         <input min="0" max="20" type="number" id="neutralization_message_id" value="5"/>
         <small id="neutralization_messageHelp">Уведомления о нейтрализации будут отключены, когда останется 5 шпионов.</small><br>
         
@@ -22,14 +22,6 @@
         <select id="witness_id" class="form-select">
             <option value="all">Все окружающие</option>
             <option value="gamers">Только игроки</option>
-        </select>
-        
-        <!-- <br>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="gamers_list_id" checked>
-            <label>Список игроков на старте.</label>
-        </div>
-        <small id="gamers_listHelp">В начале игры появится список всех участников.</small><br> -->
         
         <br>
         <div class="form-check form-switch">
@@ -52,12 +44,8 @@
     <script src="https://telegram.org/js/telegram-web-app.js">
     </script>
     <script>
-        let tg = window.Telegram.WebApp;
-        let submitBtn = document.getElementById("submitBtn");
-        tg.expand();
-        
-        let neutralization_message_field = document.getElementById("neutralization_message_id");
-        neutralization_message_field.addEventListener("change",()=>{
+
+        neutralizetin_message_field_event = () => {
             if (neutralization_message_field.value == 0){
                 document.getElementById("neutralization_messageHelp").textContent = "Уведомления о нейтрализации будут приходить всегда.";
             }else{
@@ -69,33 +57,66 @@
                 }
                 document.getElementById("neutralization_messageHelp").textContent = "Уведомления о нейтрализации будут отключены, когда останется " + neutralization_message_field.value + spies_text;
             }
-        });
+        }
 
-        let spy_confirm_field = document.getElementById("spy_confirm_id");
-        spy_confirm_field.addEventListener("change",()=>{
+        spy_confirm_field_event = ()=>{
             let spy_confirm_text = "агент."
             if (spy_confirm_field.checked){
                 spy_confirm_text = "шпион."
             }
             document.getElementById("spy_confirmHelp").textContent = "Подтверждать нейтрализацию будет " + spy_confirm_text;
             
-        });
+        }
 
-        // let gamers_list_field = document.getElementById("gamers_list_id");
-        // gamers_list_field.addEventListener("change",()=>{
-        //     if (gamers_list_field.checked){
-        //         document.getElementById("gamers_listHelp").textContent = "В начале игры появится список всех участников.";
-        //     }else{
-        //         document.getElementById("gamers_listHelp").textContent = "Игроки не получат точный список участников.";
-        //     }
-        // });
+        let main_room_id = null;
+        window.onload = function() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const room_id = urlParams.get('room_id');
+            if (room_id){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", "https://neutralizerbot.ru/database/api/get_room_by_id?room_id="+room_id, false );
+                xmlHttp.send( null );
+                if (xmlHttp.responseText != "False"){
+                    main_room_id = room_id;
+                    
+                    res = JSON.parse(JSON.parse(xmlHttp.responseText)["room"]["preferences"]);
+
+                    document.getElementById("neutralization_message_id").value = res["neutralization_message"];
+                    neutralizetin_message_field_event();
+
+                    changeSelected = (select_id, option_text) => {
+                        const $select = document.querySelector("#"+select_id);
+                        $select.value = option_text;
+                    };
+
+                    changeSelected("witness_id", res["witness"]);
+
+                    document.getElementById("spy_confirm_id").checked = (res["spy_confirm"] == "True");
+                    spy_confirm_field_event();
+
+                    document.getElementById("extra_preferences_id").value = res["extra_preferences"]
+                }
+            }
+        }
+
+        let tg = window.Telegram.WebApp;
+        let submitBtn = document.getElementById("submitBtn");
+        tg.expand();
+        
+        let neutralization_message_field = document.getElementById("neutralization_message_id");
+
+        neutralization_message_field.addEventListener("change", neutralizetin_message_field_event);
+
+        let spy_confirm_field = document.getElementById("spy_confirm_id");
+        spy_confirm_field.addEventListener("change", spy_confirm_field_event);
 
         submitBtn.addEventListener("click", () =>{
+
             let data = {
-                type: "room_preferences",
+                type: "room_preferences_update",
                 neutralization_message: document.getElementById("neutralization_message_id").value,
                 witness: document.getElementById("witness_id").value,
-                // gamers_list: document.getElementById("gamers_list_id").checked,
                 spy_confirm: document.getElementById("spy_confirm_id").checked,
                 extra_preferences: document.getElementById("extra_preferences_id").value
             }
