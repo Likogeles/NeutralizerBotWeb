@@ -122,29 +122,49 @@
         let submitBtn = document.getElementById("submitBtn");
         tg.expand();
 
-        submitBtn.addEventListener("click", () =>{
-            document.getElementById("error").innerText = "";
-            document.getElementById("error").style.visibility = "hidden";
+        submitBtn.addEventListener("click", (event) =>{
+            let _error = document.getElementById("error");
             let _name = document.getElementById("first_name_id").value;
             let _surname = document.getElementById("surname_id").value;
             let _nickname = document.getElementById("nickname_id").value;
+            
+            _error.innerText = "";
+            _error.style.visibility = "hidden";
 
+            let final_flag = false;
+            let error_text = ""
             if (_name.length == 0){
-                document.getElementById("error").innerText = "Имя слишком короткое.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
+                error_text = error_text + "- Имя слишком короткое.\n";
+                final_flag = true;
+            }
+            if (_name.includes(",") || _name.includes("'") || _name.includes('"') || _name.includes("/") || _name.includes("\\")){
+                error_text = error_text + "- Имя не должно содержать знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
+                final_flag = true;
             }
             if (_surname.length == 0){
-                document.getElementById("error").innerText = "Фамилия слишком короткая.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
+                error_text = error_text + "- Фамилия слишком короткая.\n";
+                final_flag = true;
+            }
+            if (_surname.includes(",") || _surname.includes("'") || _surname.includes('"') || _surname.includes("/") || _surname.includes("\\")){
+                error_text = error_text + "- Фамилия не должна содержать знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
+                final_flag = true;
             }
             if (_nickname.length == 0){
-                document.getElementById("error").innerText = "Никнейм слишком короткий.";
-                document.getElementById("error").style.visibility = "visible";
-                return;
+                error_text = error_text + "- Никнейм слишком короткий.\n";
+                final_flag = true;
+            }
+            if (_nickname.includes(",") || _nickname.includes("'") || _nickname.includes('"') || _nickname.includes("/") || _nickname.includes("\\")){
+                error_text = error_text + "- Никнейм не должен содержать знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
+                final_flag = true;
             }
             
+            if (final_flag){
+                _error.style.visibility = "visible";
+                _error.innerText = error_text
+                event.preventDefault();
+                return false;
+            }
+
             let data = {
                 type: "questionnaire",
                 name: _name,
@@ -160,7 +180,7 @@
             if (main_user_id){
                 data["type"] = "questionnaire_user_update";
             }
-
+            
             tg.sendData(JSON.stringify(data));
 
             tg.close();
