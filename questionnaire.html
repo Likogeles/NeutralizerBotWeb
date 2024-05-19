@@ -93,24 +93,24 @@
 
             if (user_id){
                 main_user_id = user_id;
-                res = JSON.parse(xmlHttp.responseText)["user"];
                 
-                document.getElementById("first_name_id").value = res["name"];
-                document.getElementById("surname_id").value = res["surname"];
-                document.getElementById("nickname_id").value = res["nickname"];
+                document.getElementById("first_name_id").value = urlParams.get('name');
+                document.getElementById("surname_id").value = urlParams.get('surname');
+                document.getElementById("nickname_id").value = urlParams.get('nickname');
                 
+                let form = JSON.parse(urlParams.get('form').replaceAll("'", '"'));
 
                 changeSelected = (select_id, option_text) => {
                     const $select = document.querySelector("#"+select_id);
                     $select.value = option_text;
                 };
 
-                changeSelected("continent_id", res["form"]["continent"]);
-                changeSelected("drink_id", res["form"]["drink"]);
-                changeSelected("transport_id", res["form"]["transport"]);
-                changeSelected("smell_id", res["form"]["smell"]);
-                changeSelected("pet_id", res["form"]["pet"]);
-                changeSelected("employment_id", res["form"]["employment"]);
+                changeSelected("continent_id", form["continent"]);
+                changeSelected("drink_id", form["drink"]);
+                changeSelected("transport_id", form["transport"]);
+                changeSelected("smell_id", form["smell"]);
+                changeSelected("pet_id", form["pet"]);
+                changeSelected("employment_id", form["employment"]);
             }
         }
         let submitBtn = document.getElementById("submitBtn");
