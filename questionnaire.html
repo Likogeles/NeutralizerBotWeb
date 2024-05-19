@@ -83,6 +83,8 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
 
+        let tg = window.Telegram.WebApp;
+
         let main_user_id = null;
         window.onload = function() {
             const queryString = window.location.search;
@@ -92,8 +94,13 @@
             if (user_id){
                 var xmlHttp = new XMLHttpRequest();
                 // xmlHttp.open( "GET", "http://127.0.0.1:4040/api/get_user_by_id?user_id="+user_id, false );
-                xmlHttp.open( "GET", "https://neutralizerbot.ru/database/api/get_user_by_id?user_id="+user_id, false );
+                xmlHttp.open( "GET", "https://neutralizerbot.ru/database/api/get_user_by_id?user_id="+user_id);
                 xmlHttp.send( null );
+                
+                xmlHttp.onload = function() {
+                    tg.openInvoice(JSON.parse(xmlHttp.response).result);
+                }
+
                 if (xmlHttp.responseText != "False"){
                     main_user_id = user_id;
                     res = JSON.parse(xmlHttp.responseText)["user"];
@@ -119,8 +126,6 @@
                 }
             }
         }
-
-        let tg = window.Telegram.WebApp;
         let submitBtn = document.getElementById("submitBtn");
         tg.expand();
 
