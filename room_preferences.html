@@ -22,7 +22,7 @@
         <select id="witness_id" class="form-select">
             <option value="all">Все окружающие</option>
             <option value="gamers">Только игроки</option>
-        
+        </select>
         <br>
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="spy_confirm_id" checked>
@@ -35,14 +35,14 @@
         <small>Укажите здесь правила, которые мы не предусмотрели.</small>
         <textarea id="extra_preferences_id" rows="3"></textarea>
         <br>
-        
+
+        <div id="error" class="alert alert-danger" role="alert" visibility="hidden"></div>
         <br>
         <center>
             <input id="submitBtn" type="submit" value="Сохранить">
         </center>
     </form>
-    <script src="https://telegram.org/js/telegram-web-app.js">
-    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
 
         neutralizetin_message_field_event = () => {
@@ -113,12 +113,31 @@
 
         submitBtn.addEventListener("click", () =>{
 
+            _pref = document.getElementById("extra_preferences_id").value
+
+            let _error = document.getElementById("error");
+            _error.innerText = "";
+            _error.style.visibility = "hidden";
+            error_text = "";
+
+            if (_pref.includes("'") || _pref.includes('"')){
+                error_text = error_text + '- Дополнительные правила не должны содержать кавычки. Вместо них предлагаем использовать знаки "<" и ">".\n';
+                final_flag = true;
+            }
+            
+            if (final_flag){
+                _error.style.visibility = "visible";
+                _error.innerText = error_text
+                event.preventDefault();
+                return false;
+            }
+
             let data = {
                 type: "room_preferences_update",
                 neutralization_message: document.getElementById("neutralization_message_id").value,
                 witness: document.getElementById("witness_id").value,
                 spy_confirm: document.getElementById("spy_confirm_id").checked,
-                extra_preferences: document.getElementById("extra_preferences_id").value
+                extra_preferences: _pref
             }
             tg.sendData(JSON.stringify(data));
 
