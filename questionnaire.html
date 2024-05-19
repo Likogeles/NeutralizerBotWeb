@@ -105,7 +105,9 @@
 
                     changeSelected = (select_id, option_text) => {
                         const $select = document.querySelector("#"+select_id);
-                        $select.value = option_text;
+                        let option = select.querySelector(option_text);
+                        select.value = option.value;
+                        // $select.value = option_text;
                     };
 
                     changeSelected("continent_id", res["form"]["continent"]);
