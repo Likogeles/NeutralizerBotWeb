@@ -131,24 +131,24 @@
                 error_text = error_text + "- Имя слишком короткое.\n";
                 final_flag = true;
             }
-            if (_name.includes(",") || _name.includes("'") || _name.includes('"') || _name.includes("/") || _name.includes("\\")){
-                error_text = error_text + "- Имя не должно содержать знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
+            if (_name.includes(" ") || _name.includes(",") || _name.includes("'") || _name.includes('"') || _name.includes("/") || _name.includes("\\")){
+                error_text = error_text + "- Имя не должно содержать пробелы, знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
                 final_flag = true;
             }
             if (_surname.length == 0){
                 error_text = error_text + "- Фамилия слишком короткая.\n";
                 final_flag = true;
             }
-            if (_surname.includes(",") || _surname.includes("'") || _surname.includes('"') || _surname.includes("/") || _surname.includes("\\")){
-                error_text = error_text + "- Фамилия не должна содержать знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
+            if (_surname.includes(" ") || _surname.includes(",") || _surname.includes("'") || _surname.includes('"') || _surname.includes("/") || _surname.includes("\\")){
+                error_text = error_text + "- Фамилия не должна содержать пробелы, знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
                 final_flag = true;
             }
             if (_nickname.length == 0){
                 error_text = error_text + "- Никнейм слишком короткий.\n";
                 final_flag = true;
             }
-            if (_nickname.includes(",") || _nickname.includes("'") || _nickname.includes('"') || _nickname.includes("/") || _nickname.includes("\\")){
-                error_text = error_text + "- Никнейм не должен содержать знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
+            if (_nickname.includes(" ") || _nickname.includes(",") || _nickname.includes("'") || _nickname.includes('"') || _nickname.includes("/") || _nickname.includes("\\")){
+                error_text = error_text + "- Никнейм не должен содержать пробелы, знаки пунктуации и специальные символы (кавычки, запятые и слэши).\n";
                 final_flag = true;
             }
             

@@ -76,7 +76,7 @@
             if (room_id){
                 main_room_id = room_id;
 
-                res = JSON.parse(urlParams.get("preferences").replaceAll("'", '"'));
+                res = JSON.parse(urlParams.get("preferences").replaceAll("'", '"').replaceAll("(_)", ' '));
 
                 document.getElementById("neutralization_message_id").value = res["neutralization_message"];
                 neutralizetin_message_field_event();
