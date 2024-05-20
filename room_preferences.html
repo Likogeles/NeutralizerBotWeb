@@ -92,7 +92,7 @@
 
                 changeSelected("witness_id", res["witness"]);
 
-                document.getElementById("spy_confirm_id").checked = (res["spy_confirm"] == "True");
+                document.getElementById("spy_confirm_id").checked = (res["spy_confirm"]);
                 spy_confirm_field_event();
 
                 document.getElementById("extra_preferences_id").value = res["extra_preferences"];
