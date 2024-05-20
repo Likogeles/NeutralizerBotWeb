@@ -114,6 +114,7 @@
             _error.innerText = "";
             _error.style.visibility = "hidden";
             error_text = "";
+            final_flag = false;
 
             if (_pref.includes("'") || _pref.includes('"')){
                 error_text = error_text + '- Дополнительные правила не должны содержать кавычки. Вместо них предлагаем использовать знаки "<" и ">".\n';
