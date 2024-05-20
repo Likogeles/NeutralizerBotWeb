@@ -98,7 +98,7 @@
                 document.getElementById("surname_id").value = urlParams.get('surname');
                 document.getElementById("nickname_id").value = urlParams.get('nickname');
                 
-                let form = JSON.parse(urlParams.get('form').replaceAll("'", '"'));
+                let form = JSON.parse(urlParams.get('form').replaceAll("'", '"').replaceAll("(_)", ' '));
 
                 changeSelected = (select_id, option_text) => {
                     const $select = document.querySelector("#"+select_id);
