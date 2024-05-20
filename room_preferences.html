@@ -74,29 +74,24 @@
             const urlParams = new URLSearchParams(queryString);
             const room_id = urlParams.get('room_id');
             if (room_id){
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open( "GET", "https://neutralizerbot.ru/database/api/get_room_by_id?room_id="+room_id, false );
-                xmlHttp.send( null );
-                if (xmlHttp.responseText != "False"){
-                    main_room_id = room_id;
-                    
-                    res = JSON.parse(JSON.parse(xmlHttp.responseText)["room"]["preferences"]);
+                main_room_id = room_id;
 
-                    document.getElementById("neutralization_message_id").value = res["neutralization_message"];
-                    neutralizetin_message_field_event();
+                res = JSON.parse(urlParams.get("preferences").replaceAll("'", '"'));
 
-                    changeSelected = (select_id, option_text) => {
-                        const $select = document.querySelector("#"+select_id);
-                        $select.value = option_text;
-                    };
+                document.getElementById("neutralization_message_id").value = res["neutralization_message"];
+                neutralizetin_message_field_event();
 
-                    changeSelected("witness_id", res["witness"]);
+                changeSelected = (select_id, option_text) => {
+                    const $select = document.querySelector("#"+select_id);
+                    $select.value = option_text;
+                };
 
-                    document.getElementById("spy_confirm_id").checked = (res["spy_confirm"] == "True");
-                    spy_confirm_field_event();
+                changeSelected("witness_id", res["witness"]);
 
-                    document.getElementById("extra_preferences_id").value = res["extra_preferences"]
-                }
+                document.getElementById("spy_confirm_id").checked = (res["spy_confirm"] == "True");
+                spy_confirm_field_event();
+
+                document.getElementById("extra_preferences_id").value = res["extra_preferences"];
             }
         }
 
