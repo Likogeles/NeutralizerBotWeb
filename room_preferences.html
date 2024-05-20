@@ -79,8 +79,8 @@
                 res = JSON.parse(urlParams.get("preferences")
                 .replaceAll("'", '"')
                 .replaceAll("(_)", ' ')
-                .replaceAll(" True", 'true')
-                .replaceAll(" False", 'false'));
+                .replaceAll(" True", '"True"')
+                .replaceAll(" False", '"False"'));
 
                 document.getElementById("neutralization_message_id").value = res["neutralization_message"];
                 neutralizetin_message_field_event();
@@ -92,9 +92,8 @@
 
                 changeSelected("witness_id", res["witness"]);
 
-                document.getElementById("spy_confirm_id").checked = (res["spy_confirm"]);
-                console.log(res["spy_confirm"])
-                console.log(typeof(res["spy_confirm"]))
+                document.getElementById("spy_confirm_id").checked = (res["spy_confirm"] == "True");
+                
                 spy_confirm_field_event();
 
                 document.getElementById("extra_preferences_id").value = res["extra_preferences"];
